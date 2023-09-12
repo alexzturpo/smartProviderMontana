@@ -1,0 +1,320 @@
+<mvc:View controllerName="spm.aplication.controller.vConsultaAnulacionPR"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core" 
+    xmlns:tab="sap.ui.table"
+    xmlns:layout="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns="sap.m">  
+    <Page title="Consulta y Anulación de Pre-Registro" navButtonPress="onPageBack" showNavButton="true"  titleAlignment="Center">
+    <SplitContainer id="SplitContDemo" initialDetail="detailF" initialMaster="master2">
+        <masterPages> 
+            <Page id="master1" title="Ordenes de Compra" titleAlignment="Center"  class="sapUiStdPage"> 
+                <headerContent> 
+                    <Button icon="sap-icon://filter" press="btnFiltros" />
+                </headerContent> 
+                <content>
+                    <SearchField liveChange="onSearchFac" width="100%" placeholder="Buscar factura"/>
+                    <List id="idListMaster1" items="{ path : 'myParam>/listFactura'}" includeItemInSelection="true" mode="SingleSelectMaster" noDataText="No se halló ninguna Factura">
+                        <items>
+                            <ObjectListItem title="Factura: {myParam>ID_FACTURA}" icon="sap-icon://sales-order-item" type="Active" press="clicItemFacturaVal"
+                                intro="{myParam>NOM_DEM_RAZ_ADQ} - {myParam>NOM_DEM_RAZ_COMERCIAL}" number="{myParam>TOTAL_IMP}" numberUnit="{myParam>MONEDA}">
+                                <attributes>
+                                    <ObjectAttribute title="Fecha" text="{ path: 'myParam>FC_FEC_REGISTRO'}"/>
+                                    <ObjectAttribute title="Hora" text="{myParam>FC_HORA_REGISTRO}"/>
+                                    <ObjectAttribute title="Carga" text="{ path: 'myParam>TIPO_CARGA', formatter: '.formatTipoCarga' }"/>
+                                </attributes>
+                                <firstStatus>
+                                    <ObjectStatus text="{myParam>EM_RUC}" state="Information"/>
+                                </firstStatus>
+                                <secondStatus>
+                                    <ObjectStatus text="{myParam>US_RUC}" state="Information"/>
+                                </secondStatus>
+                            </ObjectListItem>
+                        </items>
+                    </List>
+                </content>
+            </Page>
+            <!-- <Page id="master2" title="Filtros"  titleAlignment="Center" class="sapUiStdPage">
+                <headerContent> 
+                    <Button icon="sap-icon://filter" press="btnSeleccionarFiltros" />
+                </headerContent> 
+                <content> 
+                    <f:Form editable="true" class="sapUiSmallMarginBottom" >  
+                        <f:toolbar>
+                            <Toolbar height="auto"> 
+                                <RadioButton text="Por fecha" groupName="tipoFiltro" />
+                                <RadioButton text="Entre fechas" groupName="tipoFiltro" />
+                            </Toolbar>
+                        </f:toolbar>
+                        <f:layout> <f:ColumnLayout columnsM="2" columnsL="3" columnsXL="4"/> 
+                        </f:layout>
+                        <f:formContainers>
+                            <f:FormContainer>
+                                <f:formElements> 
+                                    <f:FormElement label="Fecha">
+                                        <f:fields> <DatePicker displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd"/> </f:fields>
+                                    </f:FormElement> 
+                                </f:formElements>
+                            </f:FormContainer>
+                            <f:FormContainer>
+                                <f:formElements> 
+                                    <f:FormElement label="Fecha inicio">
+                                        <f:fields> <DatePicker displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd"/> </f:fields>
+                                    </f:FormElement> 
+                                    <f:FormElement label="Fecha fin">
+                                        <f:fields> <DatePicker displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd"/> </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+                            <f:FormContainer>
+                                <f:formElements> 
+                                    <f:FormElement label="Filtro situación">
+                                        <f:fields>
+                                            <Select id="idSituacion" items="{ path: 'myParam>/listSituacion'}" class="sapUiSmallMarginBottom" >
+                                                <core:Item key="{myParam>clistSituacionNom}" text="{myParam>clistSituacionNom}"/>
+                                            </Select>
+                                        </f:fields>
+                                    </f:FormElement> 
+                                    <f:FormElement label="Filtro estado">
+                                        <f:fields>
+                                            <Select id="idEstado" items="{ path: 'myParam>/listEstado'}" class="sapUiSmallMarginBottom" >
+                                                <core:Item key="{myParam>clistEstadoNom}" text="{myParam>clistEstadoNom}"/>
+                                            </Select>
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+                        </f:formContainers>
+                    </f:Form>  
+                </content>
+            </Page> -->
+        </masterPages>
+        <detailPages>
+            <!-- <Page id="detalles" title="Mantenimiento trabajadores" backgroundDesign= "Solid" navButtonPress=".onPressDetailBack" showNavButton="{= !${device>/system/desktop} }">
+                <VBox class="sapUiSmallMargin">
+                    <tab:Table rows="{  path: 'myParam>/dataTest' }" selectionMode="Single"  visibleRowCount="5" ariaLabelledBy="title">
+                        <tab:extension>
+                            <OverflowToolbar >
+                                <Title text="Lista de trabajadores"/>
+                                <ToolbarSpacer />
+                                <Button text="Agregar" press="addTrabajador" icon="sap-icon://add" /> 
+                                <Button text="Guardar" press="editNot" icon="sap-icon://save" type="Emphasized"/>  
+                            </OverflowToolbar>
+                        </tab:extension>
+                        <tab:columns>
+                            <tab:Column width="6rem">
+                                <Label textAlign="Center" wrapping ="true"  text="Estado"/>
+                                <tab:template> <Switch type="AcceptReject" state="{myParam>booleano}"/> </tab:template>
+                            </tab:Column>
+                            <tab:Column width="auto" >
+                                <Label textAlign="Center" wrapping ="true"  text="Nombre" />
+                                <tab:template> <Text text="{myParam>cadena}" wrapping="true" /> </tab:template>
+                            </tab:Column>
+                            <tab:Column width="6rem" >
+                                <Label textAlign="Center" wrapping ="true"  text="Permisos impresión" />
+                                <tab:template> <RadioButton  /> </tab:template>
+                            </tab:Column>
+                            <tab:Column width="6rem" >
+                                <Label textAlign="Center" wrapping ="true"  text="Permisos de descarga" />
+                                <tab:template> <RadioButton  /> </tab:template>
+                            </tab:Column>
+                        </tab:columns>
+                    </tab:Table> 
+                </VBox> 
+            </Page>  -->
+            <Page id="detailF" title="Factura previa " titleAlignment="Center" >
+                <headerContent> 
+                    <Button tooltip="Descargar PDF" id="idDescargarPDF" icon="sap-icon://pdf-attachment" press="btnDescargarPDF"/>
+                    <Button id="idErrores" icon="sap-icon://message-popup" text="{myParam>/listErrores/length}" type="Emphasized" press="btnErrores"/>
+                    <Button id="idEliminar" icon="sap-icon://sys-cancel" press="ressEliminarFacturaVerificar"/>
+                    <!-- <Button id="idLogOff" icon="sap-icon://log" press="LogOffPress"/> -->
+                </headerContent> 
+                <content>
+                    <ObjectHeader id="ohFac" binding="{path : 'myParam>/listConsultaResumenFactura'}" responsive="true" fullScreenOptimized="false"
+                        icon="sap-icon://sales-order-item" title="Factura: {myParam>ID_FACTURA}" backgroundDesign="Translucent"
+                        intro="{myParam>NOM_DEM_RAZ_ADQ} - {myParam>NOM_DEM_RAZ_COMERCIAL}" number="{myParam>TOTAL_IMP}" numberUnit="{myParam>MONEDA}" titleActive="true"
+                        titlePress="handleTitlePress">
+                        <attributes>
+                            <ObjectAttribute title="Fecha registro" text="{ path: 'myParam>FC_FEC_REGISTRO'}"/>
+                            <ObjectAttribute title="Hora registro" text="{myParam>FC_HORA_REGISTRO}"/>
+                            <ObjectAttribute title="Versión UBL" text="{ path: 'myParam>UBL'}" visible="false"/>
+                            <ObjectAttribute title="F.estim.pago" text="{ path: 'myParam>FEC_TEN'}"/>
+                            <ObjectAttribute title="Correlativo" text="{ path: 'myParam>CO_FACTURA'}"/>
+                            <ObjectAttribute title="Fecha Pago" text="{ path: 'myParam>FEC_JOB'}"/>
+                            <ObjectAttribute title="Total IGV" text="{ path: 'myParam>TOTAL_IGV'}"/>
+                            <ObjectAttribute title="Total sin IGV" text="{ path: 'myParam>TOTAL_IMP'}"/>
+                            <ObjectAttribute id="idSumaTotalImporConIGV" title="Total con IGV"/>
+                            <ObjectAttribute title="Fecha emisión" text="{ path: 'myParam>FC_FEC_EMISION'}"/>
+                            <ObjectAttribute title="Tipo" text="{ path: 'myParam>TIPO_CARGA', formatter: '.formatTipoCarga' }"/> 
+                        </attributes>
+                        <statuses>
+                            <ObjectStatus title="Estado" text="{ path: 'myParam>ESTADO', formatter: '.formatEstadoFactura' }"
+                                state="{ path: 'myParam>ESTADO', formatter: '.formatEstadoFactura2' }"/>
+                            <ObjectStatus title="RUC empresa" text="{myParam>EM_RUC}" state="Information"/>
+                            <ObjectStatus title="RUC proveedor" text="{myParam>US_RUC}" state="Information"/>
+                        </statuses>
+                    </ObjectHeader>
+                    <IconTabBar expanded="true" class="sapUiResponsiveContentPadding">
+                        <items>
+                            <IconTabFilter id="idIconBarItem" key="Item" text="Items Seleccionados a Facturar" count="{myParam>/listItemFacturasLenght}">  
+                                <tab:Table id="idTableItemFacturas" rows="{ path: 'myParam>/listItemFacturas'}" class="sapUiSmallMarginBottom" visibleRowCount="8">
+                                    <tab:extension>
+                                        <OverflowToolbar height="auto" > 
+                                            <core:Icon src="sap-icon://paid-leave" alt="Cart" size="1.25rem"/>
+                                            <Title text="Detalle de la factura"/>
+                                            <ToolbarSpacer/>
+                                            <Text text="N° Registros ( {myParam>/listItemFacturasLenght} )" class="sapUiSmallMarginEnd"/>
+                                            <Button id="idButtonPos" text="Posiciones" icon="sap-icon://activity-2" press="btnBuscarItem2" type="Emphasized"/>
+                                        </OverflowToolbar>
+                                    </tab:extension>
+                                    <tab:columns>
+                                        <tab:Column width="8rem" hAlign="Center">
+                                            <Text text="Detalle Item"/>
+                                            <tab:template> <Button text="Detalle" icon="sap-icon://popup-window" press="btnBuscarItem" type="Emphasized"/> </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="5rem" hAlign="Center">
+                                            <Text text="Posición"/>
+                                            <tab:template> <Label text="{myParam>POS_FACTURA}"/> </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="8rem" hAlign="Center">
+                                            <Text text="Precio Neto"/>
+                                            <tab:template> <Label text="{myParam>PRECIO_NETO}" design="Bold"/> </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="6rem" hAlign="Center">
+                                            <Text text="Código"/>
+                                            <tab:template> <Label text="{myParam>CODIGO}" design="Bold"/> </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="20rem" hAlign="Center">
+                                            <Text text="Descripción"/>
+                                            <tab:template>  <Text text="{myParam>DESCRIPCION}"/> </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="6rem" hAlign="Center">
+                                            <Text text="Unidad de Medida"/>
+                                            <tab:template> <Text text="{myParam>UND_MED}"/> </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="6rem" hAlign="Center">
+                                            <Text text="Cantidad"/>
+                                            <tab:template> <Text text="{myParam>CANTIDAD}"/> </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="8rem" hAlign="Center">
+                                            <Text text="Precio Unitario por Item"/>
+                                            <tab:template> <Text text="{myParam>PRE_UNI}"/> </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="6rem" hAlign="Center">
+                                            <Text text="Precio Venta por Item"/>
+                                            <tab:template> <Text text="{myParam>PRE_VENTA}"/> </tab:template>
+                                        </tab:Column>
+                                    </tab:columns>
+                                </tab:Table>
+
+                                <tab:Table id="idTableItemPosiciones" rows="{ path: 'myParam>/listItemFacturaPosicion'}" class="sapUiSmallMarginBottom" visibleRowCount="8">
+                                    <tab:extension>
+                                        <OverflowToolbar height="auto" > 
+                                            <core:Icon src="sap-icon://paid-leave" alt="Cart" size="1.25rem"/>
+                                            <Title text="Posiciones de la factura" />
+                                            <ToolbarSpacer/>
+                                            <Text text="N° Registros ( {myParam>/listItemFacturaPosicion/length} )"/>
+                                        </OverflowToolbar>
+                                    </tab:extension>  
+                                    <tab:columns>
+                                        <tab:Column width="5rem" hAlign="Center">
+                                            <Text text="Posición"/>
+                                            <tab:template>
+                                                <Label text="{myParam>POS_FACTURA}"/>
+                                            </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="6rem" hAlign="Center">
+                                            <Text text="Precio Ingresado"/>
+                                            <tab:template>
+                                                <ObjectNumber number="{myParam>PRECIO_ING}" unit="{myParam>UND_MED}"/>
+                                            </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="6rem" hAlign="Center">
+                                            <Text text="Cantidad"/>
+                                            <tab:template>
+                                                <ObjectNumber number="{myParam>CANTIDAD}"/>
+                                            </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="7rem" hAlign="Center">
+                                            <Text text="Vale"/>
+                                            <tab:template>
+                                                <Label text="{myParam>VALE}"/>
+                                            </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="7rem" hAlign="Center">
+                                            <Text text="Fecha"/>
+                                            <tab:template>
+                                                <Label text="{myParam>FEC_VALE}"/>
+                                            </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="7rem" hAlign="Center" id="idColumnH">
+                                            <Text text="Hoja Entrada"/>
+                                            <tab:template>
+                                                <Label text="{myParam>DE_HOJA_ENTRADA}"/>
+                                            </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="7rem" hAlign="Center" id="idColumnD">
+                                            <Text text="Doc. Material"/>
+                                            <tab:template>
+                                                <Label text="{myParam>DE_DOC_MATERIAL}"/>
+                                            </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="20rem" hAlign="Center">
+                                            <Text text="Descripción"/>
+                                            <tab:template>
+                                                <Text text="{myParam>DESCRIPCION}"/>
+                                            </tab:template>
+                                        </tab:Column>
+                                        <tab:Column width="8rem" hAlign="Center">
+                                            <Text text="Guía de remisión"/>
+                                            <tab:template>
+                                                <Text text="{myParam>GUIA_REMISION}"/>
+                                            </tab:template>
+                                        </tab:Column>
+                                    </tab:columns>
+                                </tab:Table> 
+                            </IconTabFilter>
+                            <IconTabFilter id="idIconBarDocumento" key="Documento" text="Documentos de sustento" count="{myParam>/listDocAdjuntarFacLenght}">
+                                <Panel width="auto" class="sapUiTinyMargin">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <Title text="Lista de documentos adjuntos ({myParam>/listDocAdjuntarFac/length})"/>
+                                            <ToolbarSpacer/>
+                                            <SearchField liveChange="onSearchObjeto" width="30%" placeholder="Buscar documento"/>
+                                            <u:FileUploader id="filterId" buttonOnly="true"  uploadComplete="onUploadComplete" uploadStart="onUploadStart" change="onChangeFile"
+                                                iconOnly="true" style="Emphasized" tooltip="Adjuntar nuevo documento" icon="sap-icon://add-document"/>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <content>
+                                        <List id="idListDocumentos" items="{ path : 'myParam>/listDocAdjuntarFac'}">
+                                            <items>
+                                                <ObjectListItem title="{ path: 'myParam>NOMBRE_DOC_TOT', formatter: '.documentoAsignado' }"
+                                                    icon="{ path: 'myParam>FORMATO', formatter: '.documentoFormato' }" type="Active" press="pressDocumento"
+                                                    number="{path: 'myParam>TAMANO', formatter: '.documentoValor'}" numberUnit="KB">
+                                                    <attributes>
+                                                        <ObjectAttribute title="Fecha" text="{ path: 'myParam>FECHA_ADJ', formatter: '.fechaValor'}{ path: 'myParam>FECHA_DJ', formatter: '.documentoDJ' }"/>
+                                                        <ObjectAttribute title="Hora" text="{ path: 'myParam>HORA_ADJ', formatter: '.horaValor'}{ path: 'myParam>FECHA_VENCIMIENTO_DJ', formatter: '.documentoVENC' }"/>
+                                                    </attributes>
+                                                    <firstStatus>
+                                                        <ObjectStatus text="{myParam>USUARIO}" title="Usuario"/>
+                                                    </firstStatus>
+                                                    <secondStatus>
+                                                        <ObjectStatus text="{myParam>FORMATO}" title="Formato"/>
+                                                    </secondStatus>
+                                                </ObjectListItem>
+                                            </items>
+                                        </List>
+                                    </content>
+                                </Panel>
+                            </IconTabFilter>
+                        </items>
+                    </IconTabBar>
+                </content>
+                <footer></footer>
+            </Page>
+        </detailPages>
+        
+    </SplitContainer>
+    </Page>
+</mvc:View>

@@ -1,0 +1,163 @@
+<mvc:View controllerName="spm.aplication.controller.vRegFacturaManualSinVale"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core" 
+    xmlns:tab="sap.ui.table"
+    xmlns="sap.m">  
+    <Page title="Registro de Factura (Manual)" navButtonPress="onPageBack" showNavButton="true"  titleAlignment="Center" class="sapUiContentPadding sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer">
+        <headerContent>
+            <Button icon="sap-icon://log" press="logoff" text="Pre-registrar" type="Emphasized" enabled="false"/> 
+		</headerContent>
+        <content>
+            <VBox class="sapUiResponsiveContentPadding sapUiResponsiveMargin"> 
+                <f:Form editable="true" class="sapUiSmallMarginBottom" >  
+                    <f:toolbar>
+                        <Toolbar height="auto"> 
+                            <Avatar displaySize="S" backgroundColor="Placeholder" displayShape="Square" badgeIcon="sap-icon://sales-order-item" class="sapUiSmallMargin"/>
+                            <Title text="Factura Fisica"/>
+                            <ToolbarSpacer />
+                            <HBox alignItems="Center" class="sapUiSmallMarginTop">
+                                <Input value="" placeholder="Ingrese serie"/>
+                                <Text text=" - " class="sapUiSmallMarginBeginEnd" ></Text> 
+                                <Input value="" placeholder="Ingrese número"/> 
+                                <Button icon="sap-icon://inspection" press="logoff" text="Validar" type="Emphasized" class="sapUiSmallMarginBeginEnd"/> 
+                            </HBox>
+                        </Toolbar>
+                    </f:toolbar>
+                    <f:layout> <f:ColumnLayout columnsM="2" columnsL="3" columnsXL="4"  /> </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="Fecha emisión">
+                                    <f:fields> <DatePicker displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd"/></f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Nombres o Denominación o Razón Social">
+                                    <f:fields> <Input value="" /> </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Número de RUC:">
+                                    <f:fields> <Input value="" /> </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Tipo de documento">
+                                    <f:fields> 
+                                        <ComboBox  selectedKey="{myParam>ZSOCIEDAD}">
+                                            <core:Item key="1000" text="1000" />
+                                        </ComboBox>   
+                                    </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Número de RUC del adquirente o usuario">
+                                    <f:fields> <Input value="" /> </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Nombres o Denominación o Razón Social del adquirente o usuario">
+                                    <f:fields> <Input value="" /> </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Moneda">
+                                    <f:fields> 
+                                        <ComboBox  selectedKey="{myParam>ZSOCIEDAD}">
+                                            <core:Item key="1000" text="1000" />
+                                        </ComboBox>   
+                                    </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Tasa de IGV">
+                                    <f:fields>
+                                        <ComboBox  selectedKey="{myParam>ZSOCIEDAD}">
+                                            <core:Item key="1000" text="1000" />
+                                        </ComboBox>   
+                                    </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Porcentaje de Descuento Global (%)">
+                                    <f:fields> <Input value="" /> </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Glosa">
+                                    <f:fields> <Input value="" /> </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Importe Total">
+                                    <f:fields> <Input value="" /> </f:fields>
+                                </f:FormElement> 
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>  
+
+                <VBox >
+                    <Text text="Mensajes de validación" class="sapUiSmalllMargin" />
+                    <MessageStrip text="Estado del contribuyente a la fecha de emisión : ACTIVO." type="Success" showIcon="true" class="sapUiTinyMargin"/> 
+                    <MessageStrip text="Condición de domicilio a la fecha de emisión : HABIDO." type="Success" showIcon="true" class="sapUiTinyMargin"/> 
+                    <MessageStrip text="La factura aún no ha sido validada." showIcon="true" class="sapUiTinyMargin"/> 
+                    <MessageStrip text="Sin items a asignar" showIcon="true" class="sapUiTinyMargin"/>  
+                </VBox>
+
+                <f:Form editable="true" class="sapUiSmallMarginBottom" > 
+                    <f:layout> 
+                        <f:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="5"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="true"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="3"
+                        columnsM="2"
+                        singleContainerFullSize="false" />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="Ruc de la empresa"  >
+                                    <f:fields> <Input value="" /> </f:fields>
+                                </f:FormElement>  
+                                <f:FormElement label="Tipo de carga"  >
+                                    <f:fields> 
+                                        <ComboBox  selectedKey="{myParam>ZSOCIEDAD}">
+                                            <core:Item key="1000" text="1000" />
+                                        </ComboBox> 
+                                    </f:fields>
+                                </f:FormElement>  
+                                <f:FormElement >
+                                    <f:fields> <Button  text="Asignar posición" press="fragmentAsigPosiciones" icon="sap-icon://document-text" type="Emphasized" /> </f:fields>
+                                </f:FormElement>  
+                            </f:formElements>
+                        </f:FormContainer>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="Ruc del proveedor"  >
+                                    <f:fields> <Input value="" /> </f:fields>
+                                </f:FormElement>  
+                                <f:FormElement label="Código detracción"  >
+                                    <f:fields> 
+                                        <ComboBox  selectedKey="{myParam>ZSOCIEDAD}">
+                                            <core:Item key="1000" text="1000" />
+                                        </ComboBox> 
+                                    </f:fields>
+                                </f:FormElement>  
+                                <f:FormElement >
+                                    <f:fields> <Button  text="Documentos" press="fragmentDocumentos"  icon="sap-icon://document-text" type="Emphasized" /> </f:fields>
+                                </f:FormElement>  
+                            </f:formElements>
+                        </f:FormContainer>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="Total descuento"  >
+                                    <f:fields> <Input value="" editable="false"/> </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Importe Total sin IGV">
+                                    <f:fields> <Input value="" editable="false"/> </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Total IGV">
+                                    <f:fields> <Input value="" editable="false"/> </f:fields>
+                                </f:FormElement> 
+                                <f:FormElement label="Importe total">
+                                    <f:fields> <Input value="" editable="false"/> </f:fields>
+                                </f:FormElement> 
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form> 
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
