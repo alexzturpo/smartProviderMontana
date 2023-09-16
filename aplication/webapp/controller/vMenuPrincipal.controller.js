@@ -23,6 +23,7 @@ function (Controller) {
                 
             pageConsultaAnulacionPR: function () { this.getRouter().getTargets().display("vConsultaAnulacionPR") },
             pageConsProgramPago: function () { this.getRouter().getTargets().display("vConsultaProgramacionPago") },
+            pageAdminUsers: function () { this.getRouter().getTargets().display("vAdminUsers") },
         //FRAGMENTS PARA LOS MODULOS 
         //FRAGMENT Pre-Registro de Factura
         fragmentRegisterFactura: function () { this._dgRegisterFactura().open() },

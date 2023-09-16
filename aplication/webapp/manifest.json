@@ -123,6 +123,12 @@
             "pattern": "vConsultaProgramacionPago",
             "titleTarget": "vConsultaProgramacionPago",
             "target": "vConsultaProgramacionPago"
+        },
+        {
+            "name": "vAdminUsers",
+            "pattern": "vAdminUsers",
+            "titleTarget": "vAdminUsers",
+            "target": "vAdminUsers"
         }
       ],
       "targets": {
@@ -181,6 +187,13 @@
           "clearControlAggregation": false,
           "viewId": "vConsultaProgramacionPago",
           "viewName": "modulos/vConsultaProgramacionPago"
+        },
+        "vAdminUsers": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "vAdminUsers",
+          "viewName": "modulos/vAdminUsers"
         }
       }
     },

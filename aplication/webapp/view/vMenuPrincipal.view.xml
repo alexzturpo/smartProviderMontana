@@ -56,8 +56,8 @@
                     </HBox>
                 </VBox>
                 <VBox> 
-                    <ScrollContainer height="50%" horizontal="true" vertical="false">
-                        <HBox justifyContent="Center">
+                    <!-- <ScrollContainer height="50%" horizontal="true" vertical="false"> -->
+                        <HBox justifyContent="Center" wrap="Wrap" >
                             <GenericTile class="sapUiSmallMarginBegin sapUiSmallMarginTop " header="Pre-Registro de Factura"
                                 subheader="Carga XML o Manual" press="fragmentRegisterFactura" visible="true">
                                 <TileContent>
@@ -82,9 +82,16 @@
                                     <ImageContent src="sap-icon://course-program"/>
                                 </TileContent>
                             </GenericTile>
+                            <GenericTile class="sapUiSmallMarginBegin sapUiSmallMarginTop " header="Administrador de usuarios"
+                                press="pageAdminUsers" visible="true">
+                                <TileContent>
+                                    <ImageContent src="sap-icon://course-program"/>
+                                </TileContent>
+                            </GenericTile>
                         </HBox>
-                    </ScrollContainer>
+                    <!-- </ScrollContainer> -->
                 </VBox> 
+                
             </VBox> 
         </content>
     </Page>
