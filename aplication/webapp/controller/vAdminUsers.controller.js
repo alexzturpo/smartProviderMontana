@@ -9,7 +9,7 @@ function (Controller) {
             return sap.ui.core.UIComponent.getRouterFor(this);
         },
         onInit: function () { },
-        onPageBack: function () { this.getRouter().getTargets().display("vMenuPrincipal") },
+        onPageBack: function () { this.getRouter().getTargets().display("vMain") },
         //FRAGMENT Añadir Usuario
         fragmentAddUsuario: function () { this._dgAddUsuario().open() },
         _dgAddUsuario: function () { 

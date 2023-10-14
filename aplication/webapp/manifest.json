@@ -83,6 +83,12 @@
           "target": [ "TargetvMain" ]
         },
         {
+          "name": "vMain",
+          "pattern": "vMain",
+          "titleTarget": "vMain",
+          "target": "vMain"
+      },
+        {
             "name": "vMenuPrincipal",
             "pattern": "vMenuPrincipal",
             "titleTarget": "vMenuPrincipal",
@@ -129,6 +135,12 @@
             "pattern": "vAdminUsers",
             "titleTarget": "vAdminUsers",
             "target": "vAdminUsers"
+        },
+        {
+            "name": "vImpRecepcionConfirmidad",
+            "pattern": "vImpRecepcionConfirmidad",
+            "titleTarget": "vImpRecepcionConfirmidad",
+            "target": "vImpRecepcionConfirmidad"
         }
       ],
       "targets": {
@@ -139,6 +151,13 @@
           "viewId": "vMain",
           "viewName": "vMain"
         }, 
+        "vMain": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "vMain",
+          "viewName": "vMain"
+        },
         "vMenuPrincipal": {
           "viewType": "XML",
           "transition": "slide",
@@ -194,6 +213,13 @@
           "clearControlAggregation": false,
           "viewId": "vAdminUsers",
           "viewName": "modulos/vAdminUsers"
+        },
+        "vImpRecepcionConfirmidad": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "vImpRecepcionConfirmidad",
+          "viewName": "modulos/vImpRecepcionConfirmidad"
         }
       }
     },

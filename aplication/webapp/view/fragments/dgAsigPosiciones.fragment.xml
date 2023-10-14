@@ -13,8 +13,8 @@ xmlns:f="sap.ui.layout.form"
                 <ToolbarSpacer />
                 <Title text="Asignar posiciones" level="H4" />
                 <ToolbarSpacer />
-                <Button text="Filtrar" icon="sap-icon://filter" press="searchVer" type="Emphasized" /> 
-                <Button text="Remover" icon="sap-icon://clear-filter" press="searchVer"/> 
+                <Button text="Filtrar" icon="sap-icon://filter" press="dgSearchAsigPosiciones" type="Emphasized" /> 
+                <Button text="Remover" icon="sap-icon://clear-filter" press="dgCleanSearchAsigPosiciones"/> 
             </Toolbar>
         </f:toolbar>
         <f:layout> <f:ColumnLayout columnsM="2" columnsL="3" columnsXL="4" />  </f:layout>
@@ -22,22 +22,22 @@ xmlns:f="sap.ui.layout.form"
             <f:FormContainer > 
                 <f:formElements>
                     <f:FormElement label="Fecha ingreso">
-                        <f:fields> <DatePicker displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd"/></f:fields>
+                        <f:fields> <DatePicker id="txt_fechaIngreso" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd"/></f:fields>
                     </f:FormElement> 
                     <f:FormElement label="N° documento/hoja">
-                        <f:fields> <Input value=""/> </f:fields>
+                        <f:fields> <Input id="txt_docHoja" value=""/> </f:fields>
                     </f:FormElement> 
                     <f:FormElement label="Guía de emisión">
-                        <f:fields> <Input value=""/> </f:fields>
+                        <f:fields> <Input id="txt_guiaEmision" value=""/> </f:fields>
                     </f:FormElement> 
                     <f:FormElement label="Orden de compra">
-                        <f:fields> <Input value=""/> </f:fields>
+                        <f:fields> <Input id="txt_ordenCompra" value=""/> </f:fields>
                     </f:FormElement> 
                 </f:formElements>
             </f:FormContainer> 
         </f:formContainers>
     </f:Form>
-    <tab:Table rows="{  path: 'myParam>/dataTest' }" selectionMode="None"  visibleRowCount="5" class="sapUiTinyMarginBottom" ariaLabelledBy="title">
+    <!-- <tab:Table rows="{  path: 'myParam>/dataTest' }" selectionMode="None"  visibleRowCount="5" class="sapUiTinyMarginBottom" ariaLabelledBy="title">
         <tab:columns>
             <tab:Column width="auto">
                 <Label textAlign="Center" wrapping ="true"  text="Fecha ingreso"/>
@@ -68,7 +68,31 @@ xmlns:f="sap.ui.layout.form"
                 <tab:template> <Text text="{myParam>numero}" wrapping="true" /> </tab:template>
             </tab:Column>
         </tab:columns>
-    </tab:Table> 
+    </tab:Table>  -->
+    <Table id="table_idAsignarPosiciones" items="{/dataTableAsignarPosiciones}"  mode="MultiSelect" > 
+        <columns>
+            <Column width="auto"> <Text text="Fecha ingreso" /> </Column> 
+            <Column width="auto"> <Text text="Guía remisión" /> </Column> 
+            <Column width="auto"> <Text text="Documento mat/hoja entr." /> </Column> 
+            <Column width="auto"> <Text text="Posiciones" /> </Column> 
+            <Column width="auto"> <Text text="Orden de compra" /> </Column> 
+            <Column width="auto"> <Text text="Camtidad" /> </Column>   
+            <Column width="auto"> <Text text="Importe" /> </Column>
+        </columns>
+        <items>
+            <ColumnListItem vAlign="Middle">
+                <cells>
+                    <Text text="{fechaIngreso}" /> 
+                    <Text text="{guiaRemision}" /> 
+                    <Text text="{docMat}" /> 
+                    <Text text="{posiciones}" /> 
+                    <Text text="{ordenCompra}" /> 
+                    <Text text="{cantidad}" /> 
+                    <Text text="{importe}" />  
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
     <OverflowToolbar height="auto">
         <VBox width="100%">
             <VBox justifyContent="End" width="100%">
